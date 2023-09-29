@@ -85,6 +85,7 @@ def create_email_message(receiver_email, sender_email, forename, surname):
         <p>Nous espérons que le jeu "Première mission aux Chimiques de Thann : un sans faute ?" vous plait !</p>
         <p>Si vos choix vous ont emmené vers le succès de la mission, avez-vous été tenté d'essayer d'autres choix que vous ne feriez jamais dans la vraie vie?<br />Avez-vous déjà trouvé la girafe ? le minotaure ? et Timon ?</p>
         <p>Si vous rencontrez des difficultés pour vous connecter via votre ordinateur, nous vous encourageons à essayer depuis votre smartphone.</p>
+        <p>N'hésitez pas à répondre à ce mail pour toute assistance supplémentaire.</p>
         <p>Bonne journée,</p>
         <p>L'Équipe SafeTrooper</p>
       </body>
