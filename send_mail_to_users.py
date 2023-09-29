@@ -37,7 +37,7 @@ def check_email_progress(user_data):
     users_to_email = {}
     for user in user_data:
         email = user['email']
-        if not any(d['email'] == email and d['email_sent'] for d in progress_data):
+        if not any(d['email'] == email and d['email_sent'] is True for d in progress_data):
             users_to_email[email] = user
     return users_to_email
 
@@ -64,16 +64,17 @@ def create_email_message(receiver_email, sender_email, forename, surname):
     """
 
     message = MIMEMultipart("alternative")
-    message["Subject"] = "Vos informations de connexion à SAFETROOPER"
+    message["Subject"] = "Première mission aux Chimiques de Thann - Votre progression ? Des difficultés ?"
     message["From"] = sender_email
     message["To"] = receiver_email
 
     text = """\
     Bonjour {0} {1},
-    Vous trouverez ci-dessous vos identifiants pour accéder au jeu SAFETROOPER :
-    Identifiant :
-    Mot de passe :
-    Connectez-vous en utilisant le lien suivant : https://app.safetrooper.com/
+    Nous espérons que le jeu "Première mission aux Chimiques de Thann : un sans faute ?" vous plait !
+    Si vos choix vous ont emmené vers le succès de la mission, avez-vous été tenté d'essayer d'autres choix que vous ne feriez jamais dans la vraie vie?
+    Avez-vous déjà trouvé la girafe ? le minotaure ? et Timon ?
+    Si vous rencontrez des difficultés pour vous connecter via votre ordinateur, nous vous encourageons à essayer depuis votre smartphone. 
+    N'hésitez pas à répondre à ce mail pour toute assistance supplémentaire.
     Bonne journée,
     L'Équipe SafeTrooper
     """
@@ -81,13 +82,9 @@ def create_email_message(receiver_email, sender_email, forename, surname):
     <html>
       <body>
         <p>Bonjour {0} {1},</p>
-        <p>Vous trouverez ci-dessous vos identifiants pour accéder au jeu SAFETROOPER :</p>
-        <ul>
-            <li><strong>Identifiant</strong>: </li>
-            <li><strong>Mot de passe</strong>: </li>
-        </ul>
-        <p>Connectez-vous en utilisant le lien suivant : <a href="https://app.safetrooper.com/">
-            https://app.safetrooper.com/</a></p>
+        <p>Nous espérons que le jeu "Première mission aux Chimiques de Thann : un sans faute ?" vous plait !</p>
+        <p>Si vos choix vous ont emmené vers le succès de la mission, avez-vous été tenté d'essayer d'autres choix que vous ne feriez jamais dans la vraie vie?<br />Avez-vous déjà trouvé la girafe ? le minotaure ? et Timon ?</p>
+        <p>Si vous rencontrez des difficultés pour vous connecter via votre ordinateur, nous vous encourageons à essayer depuis votre smartphone.</p>
         <p>Bonne journée,</p>
         <p>L'Équipe SafeTrooper</p>
       </body>
@@ -188,7 +185,7 @@ def send_mail_to_users(csv_filename, email_sender, app_password):
 
         # If the batch size is reached, wait for 10 minutes before the next batch
         if email_counter % batch_size == 0:
-            print(f"\nSent {batch_size} emails, waiting for 10 minutes before sending the next batch...")
+            print(f"\nSent {email_success} emails, waiting for 10 minutes before sending the next batch...")
 
             # Display a countdown
             for remaining in range(delay_between_batches, 0, -1):

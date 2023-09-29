@@ -60,7 +60,7 @@ def main():
             if option in {"1", "2", "q"}:
                 if option == "1":
                     csv_filepath = get_csv_filepath()
-                    confirmation = input(f"You chose option {option}. Are you sure? (y/n): ").strip()
+                    confirmation = input(f"You are about to send emails to users. Confirm to proceed. (y/n): ").strip()
                     if confirmation == 'y':
                         send_mail_to_users(csv_filepath, email_sender, app_password)
                     else:
