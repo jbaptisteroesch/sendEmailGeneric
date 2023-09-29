@@ -37,7 +37,7 @@ def check_email_progress(user_data):
     users_to_email = {}
     for user in user_data:
         email = user['email']
-        if not any(d['email'] == email and d['email_sent'] is True for d in progress_data):
+        if not any(d['email'] == email and d.get('email_sent') is True for d in progress_data):
             users_to_email[email] = user
     return users_to_email
 
